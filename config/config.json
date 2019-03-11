@@ -1,0 +1,4 @@
+{
+  "connectionString" : "mongodb+srv://ghanat3chus3r:iWkdP7HCzx6iKMj@nationalmobileappdev-6clnu.mongodb.net?retryWrites=true",
+  "database": "NationalMobileDevTraining"
+}
