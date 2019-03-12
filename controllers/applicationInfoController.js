@@ -3,6 +3,17 @@ const applicationInfoRouter = express.Router();
 
 applicationInfoRouter.get('/', async (req, res) => {
     return res.json({"status": "LIVE! Application Info"}).status(200);
+});
+
+applicationInfoRouter.get('/getAll', async (req, res) => {
+    require("../db/dbInit").GetConnection()
+        .then((reslts) => {
+            reslts.dbo.collection("PersonalInfo").find({}).toArray((err, result) => {
+                if (err) res.json(err).status(500);
+                reslts.db.close();
+                return res.json(result).status(200)
+            });
+        });
 })
 
 applicationInfoRouter.post('/postApplication', async (req, res) => {
@@ -17,6 +28,7 @@ applicationInfoRouter.post('/postApplication', async (req, res) => {
                     Email: personalInfo.email,
                     Phone: personalInfo.phone,
                     Location: personalInfo.location,
+                    Region: personalInfo.region,
                     DateOfBirth: personalInfo.dob,
                     IDType: personalInfo.idt,
                     IDNumber: personalInfo.id,
